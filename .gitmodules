@@ -1,3 +1,12 @@
 [submodule "shap-e"]
 	path = shap-e
 	url = https://github.com/openai/shap-e.git
+[submodule "dreamgaussian"]
+	path = dreamgaussian
+	url = https://github.com/dreamgaussian/dreamgaussian.git
+[submodule "profilic-dreamer"]
+	path = profilic-dreamer
+	url = https://github.com/thu-ml/prolificdreamer.git
+[submodule "fantasia-3d"]
+	path = fantasia-3d
+	url = https://github.com/Gorilla-Lab-SCUT/Fantasia3D.git
