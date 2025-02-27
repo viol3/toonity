@@ -18,13 +18,13 @@ class ShapEModule(ModuleBase):
     self.diffusion = diffusion_from_config(load_config('diffusion'))
     ModuleBase.__init__(self, name)
 
-  def generateFromText(prompt):
+  def generateFromText(self, prompt):
       batch_size = 4
       guidance_scale = 15.0
       latents = sample_latents(
           batch_size=batch_size,
-          model=model,
-          diffusion=diffusion,
+          model=self.model,
+          diffusion=self.diffusion,
           guidance_scale=guidance_scale,
           model_kwargs=dict(texts=[prompt] * batch_size),
           progress=True,
@@ -37,9 +37,9 @@ class ShapEModule(ModuleBase):
           s_churn=0,
       )
       for i, latent in enumerate(latents):
-          t = decode_latent_mesh(xm, latent).tri_mesh()
+          t = decode_latent_mesh(self.xm, latent).tri_mesh()
           with open(f'example_mesh_{i}.ply', 'wb') as f:
               t.write_ply(f)
           with open(f'example_mesh_{i}.obj', 'w') as f:
               t.write_obj(f)
-      ModuleBase.generateFromText(prompt)
+      #ModuleBase.generateFromText(self, prompt)
