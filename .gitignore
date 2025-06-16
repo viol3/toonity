@@ -1,1 +1,4 @@
 inter-systems/shap-e/shap_e_model_cache
+mainframe/shap_e_model_cache/transmitter.pt
+mainframe/shap_e_model_cache/text_cond.pt
+mainframe/shap_e_model_cache/ViT-L-14.pt

@@ -22,3 +22,6 @@
 [submodule "modules/dreamgaussian"]
 	path = modules/dreamgaussian
 	url = https://github.com/dreamgaussian/dreamgaussian.git
+[submodule "Hunyuan3D"]
+	path = modules/Hunyuan3D
+	url = " https://github.com/Tencent-Hunyuan/Hunyuan3D-2.git"

@@ -1,7 +1,7 @@
 import torch
 import sys
 
-sys.path.append('../')
+# sys.path.append('../')
 from ModuleBaseClass import ModuleBase
 
 from shap_e.diffusion.sample import sample_latents
@@ -38,8 +38,9 @@ class ShapEModule(ModuleBase):
       )
       for i, latent in enumerate(latents):
           t = decode_latent_mesh(self.xm, latent).tri_mesh()
-          with open(f'example_mesh_{i}.ply', 'wb') as f:
+          with open(f'{prompt}_{i}.ply', 'wb') as f:
               t.write_ply(f)
-          with open(f'example_mesh_{i}.obj', 'w') as f:
+          with open(f'{prompt}_{i}.obj', 'w') as f:
               t.write_obj(f)
+      
       #ModuleBase.generateFromText(self, prompt)
