@@ -25,3 +25,6 @@
 [submodule "modules/Hunyuan3D-2"]
 	path = modules/Hunyuan3D-2
 	url = https://github.com/Tencent-Hunyuan/Hunyuan3D-2.git
+[submodule "modules/TRELLIS"]
+	path = modules/TRELLIS
+	url = https://github.com/microsoft/TRELLIS

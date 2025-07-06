@@ -6,7 +6,7 @@ sys.path.append('../inter-systems/')
 from shapE import ShapEModule
 
 shapE = ShapEModule("ShapE_100");
-
+hunyuan = HunyuanModule("Hunyuan_100")
 
 app = FastAPI()
 
