@@ -1,7 +1,6 @@
 import torch
 import sys
-
-# sys.path.append('../')
+sys.path.append('C:/Users/Ali/Documents/toonity/modules/shap-e')
 from ModuleBaseClass import ModuleBase
 
 from shap_e.diffusion.sample import sample_latents
@@ -42,5 +41,5 @@ class ShapEModule(ModuleBase):
               t.write_ply(f)
           with open(f'{prompt}_{i}.obj', 'w') as f:
               t.write_obj(f)
-      
+
       #ModuleBase.generateFromText(self, prompt)
