@@ -32,8 +32,9 @@ async def generate(request: Request):
 async def status(uid: str):
     response = requests.get(statusLocalUrl + uid)
     ret = json.loads(response.content)
-    if(ret.status == "completed"):
-        os.system("./simplify " + mesh_path + uid + ".obj " + uid + ".obj")
+    if(ret['status'] == "completed"):
+        os.system("simplify " + mesh_path + uid + ".obj " + uid + ".obj 0.01")
+        os.system("python laplace_smoothing.py " + uid + ".obj")
     return JSONResponse(ret, status_code=200)
 
 @app.get("/simplify")

@@ -48,5 +48,5 @@ def write_obj(filename, vertices, faces):
 filename = sys.argv[1]
 vertices, faces = load_obj(filename)
 adjacency = build_adjacency(vertices, faces)
-smoothed_vertices = laplacian_smooth(vertices, adjacency, lambd=0.2, iterations=3)
+smoothed_vertices = laplacian_smooth(vertices, adjacency, lambd=0.5, iterations=8)
 write_obj(filename + "_smoothed.obj", smoothed_vertices, faces)
