@@ -6,6 +6,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 from hy3dgen.shapegen import Hunyuan3DDiTFlowMatchingPipeline
+from hy3dgen.texgen import Hunyuan3DPaintPipeline
 from hy3dgen.rembg import BackgroundRemover
 from hy3dgen.text2image import HunyuanDiTPipeline
 import torch
@@ -57,11 +58,21 @@ class HunyuanModule(ModuleBase):
         # params['guidance_scale'] = params.get('guidance_scale', 5.0)
         # params['mc_algo'] = 'mc'
         mesh = self.pipeline_shapegen(**params)[0]
+
         save_path = save_file_path = os.path.join(SAVE_DIR, f'{uid}.obj')
-        mesh.export(save_path)
-        print("exported")
+
+        print("shapegen finished")
 
         del self.pipeline_shapegen
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+
+        simplified_mesh = mesh.simplify_quadric_decimation(percent=0.8)
+        self.pipeline_tex = Hunyuan3DPaintPipeline.from_pretrained(model_path)
+        simplified_mesh = self.pipeline_tex(simplified_mesh, image)
+        print("texgen finished")
+        simplified_mesh.export(save_path)
+        del self.pipeline_tex
         torch.cuda.empty_cache()
         torch.cuda.ipc_collect()
         return save_path, uid
