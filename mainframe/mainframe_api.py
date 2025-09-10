@@ -19,7 +19,7 @@ app.add_middleware(
 
 app = FastAPI()
 
-mesh_path = "../inter-systems/shap-e/exports/"
+mesh_path = "../inter-systems/hunyuan/exports/"
 
 @app.post("/generate")
 async def generate(request: Request):
