@@ -19,7 +19,7 @@ class ShapEModule(ModuleBase):
   def __init__(self, name):
     self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     self.xm = load_model('transmitter', device=self.device)
-    self.model = load_model('image300M', device=self.device)
+    self.model = load_model('text300M', device=self.device)
     self.diffusion = diffusion_from_config(load_config('diffusion'))
     ModuleBase.__init__(self, name)
 
@@ -27,9 +27,9 @@ class ShapEModule(ModuleBase):
       return Image.open(BytesIO(base64.b64decode(image)))
 
   def generate(self, params):
-      #prompt = params["text"]
-      image = params["image"]
-      image = self.load_image_from_base64(image)
+      prompt = params["text"]
+      # image = params["image"]
+      # image = self.load_image_from_base64(image)
       uid = params["uid"]
       batch_size = 1
       guidance_scale = 15.0
@@ -38,7 +38,7 @@ class ShapEModule(ModuleBase):
           model=self.model,
           diffusion=self.diffusion,
           guidance_scale=guidance_scale,
-          model_kwargs=dict(images=[image] * batch_size),
+          model_kwargs=dict(texts=[prompt] * batch_size),
           progress=True,
           clip_denoised=True,
           use_fp16=True,
