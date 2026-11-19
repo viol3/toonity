@@ -51,7 +51,7 @@ class HunyuanModule(ModuleBase):
 
         image = self.rembg(image)
         params['image'] = image
-        seed = params.get("seed", 1234)
+        seed = params.get("seed", 1380)
         params['generator'] = torch.Generator('cuda').manual_seed(seed)
         # params['octree_resolution'] = params.get("octree_resolution", 128)
         # params['num_inference_steps'] = params.get("num_inference_steps", 5)
@@ -67,12 +67,12 @@ class HunyuanModule(ModuleBase):
         torch.cuda.empty_cache()
         torch.cuda.ipc_collect()
 
-        # simplified_mesh = mesh.simplify_quadric_decimation(percent=0.8)
-        # self.pipeline_tex = Hunyuan3DPaintPipeline.from_pretrained(model_path)
-        # simplified_mesh = self.pipeline_tex(simplified_mesh, image)
-        # print("texgen finished")
-        # simplified_mesh.export(save_path)
-        # del self.pipeline_tex
-        # torch.cuda.empty_cache()
-        # torch.cuda.ipc_collect()
+        simplified_mesh = mesh.simplify_quadric_decimation(percent=0.95)
+        self.pipeline_tex = Hunyuan3DPaintPipeline.from_pretrained(model_path)
+        simplified_mesh = self.pipeline_tex(simplified_mesh, image)
+        print("texgen finished")
+        simplified_mesh.export(save_path)
+        del self.pipeline_tex
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
         return save_path, uid

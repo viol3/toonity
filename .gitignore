@@ -1,5 +1,37 @@
-inter-systems/shap-e/shap_e_model_cache
-mainframe/shap_e_model_cache/transmitter.pt
-mainframe/shap_e_model_cache/text_cond.pt
-mainframe/shap_e_model_cache/ViT-L-14.pt
+# --- Model weights and caches (downloaded at runtime, too large for git) ---
+inter-systems/shap-e/shap_e_model_cache/
+mainframe/shap_e_model_cache/*.pt
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+
+# --- Generated 3D outputs ---
+inter-systems/*/exports/
+*_smoothed.obj
+*_simplified.obj
+*.glb
+*.gltf
+
+# --- Evaluation reports and archives (large, kept locally) ---
 reports/
+hunyuanAndShapE_aug2025reports/
+hunyuanAndShapE_aug2025reports.zip
+*.zip
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
